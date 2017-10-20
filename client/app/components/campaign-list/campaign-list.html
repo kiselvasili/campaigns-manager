@@ -1,0 +1,60 @@
+<navbar></navbar>
+<div class="jumbotron">
+    <div class="container">
+
+      <div>{{$ctrl.name}}</div>
+
+      <h1 class="display-3">Hello, Advertiser!</h1>
+      <p>You can use this area to view and manage your campaigns, including view status of each campaign. have fun!</p>
+    </div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th>Status</th>
+                      <th>Name</th>
+                      <th>Daily Budget</th>
+                      <th>Total Budget</th>
+                      <th></th>
+                  </tr>
+                  <tbody>
+                      <tr ng-repeat="key in $ctrl.campaignStats">
+                          <td>
+                            <span class="badge badge-primary">{{key.status}}</span>
+                          </td>
+                          <td>{{key.name}}</td>
+                          <td>{{key.daily_budget}}</td>
+                          <td>{{key.total_budget}}</td>
+                          <td>
+                              <div class="dropdown show">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Actions
+                                </button>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                  <a class="dropdown-item"
+                                     href="#"
+                                     ng-show="key.status!=='INACTIVE'">
+                                    Deactivate
+                                  </a>
+                                  <a class="dropdown-item" 
+                                     href="#"
+                                     ng-show="key.status!=='ACTIVE'">
+                                    Activate
+                                  </a>
+                                  <a class="dropdown-item" 
+                                     ui-sref="campaign-stat({name: key.name, id: key.id })">
+                                    Stats
+                                  </a>
+                                </div>
+                              </div>
+                          </td>
+                      </tr>
+                  </tbody>
+              </thead>
+          </table>
+      </div>
+  </div>  
