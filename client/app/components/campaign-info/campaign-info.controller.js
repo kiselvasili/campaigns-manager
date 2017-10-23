@@ -1,4 +1,5 @@
 import { ReduxUtil } from '../../redux/redux.util';
+import cloneDeep from 'lodash/cloneDeep';
 
 class CampaignInfoController {
     constructor($stateParams, campaignSvc, $state, $ngRedux, $scope, chartConfig) {
@@ -15,13 +16,14 @@ class CampaignInfoController {
 
         this.getAllCampaignStats();
 
-        this.chartConfig = chartConfig;
+        this.chartConfig = cloneDeep(chartConfig);
 
     }
 
     getAllCampaignStats() {
         this._campaignSvc.getCampaignStats(this.compaignId)
             .then((data) => {
+                console.log('state', data.data);
                 this.campaignStats = data.data;
                 this.campaignStats.forEach(item => {
                     this.chartConfig.series[0].data.push(item.impressions);
