@@ -1,47 +1,22 @@
 class CampaignInfoController {
-    constructor($stateParams, campaignSvc) {
+    constructor($stateParams, campaignSvc, $state, $ngRedux, chartConfig) {
 
         'ngInject';
 
         this._campaignSvc = campaignSvc;
 
+        this._params = $state;
+
         this.compaignName = $stateParams.name;
         this.compaignId = $stateParams.id;
+        $ngRedux.subscribe(() => {
+            let state = $ngRedux.getState();
+            console.log(state);
+            this.campaigns = state.campaignsReducer.campaigns.campaigns;
+        })
         this.getAllCampaignStats();
-        this.getAllCampaigns();
 
-        this.chartConfig = {
-                chart: {
-                    type: 'line'
-                },
-                series: [{
-                    data: [],
-                    type: 'spline',
-                    id: 'series1'
-                }],
-                title: {
-                    text: 'Hello'
-                },
-                xAxis: [{
-                    type: 'datetime'
-                }],
-                yAxis: [{ // Primary yAxis
-                    title: {
-                    text: 'number of notification',
-                    }
-                }, { // Secondary yAxis
-                    title: {
-                    text: 'usage time',
-                    },
-                    opposite: true
-                }],
-                legend: {
-                    floating: true
-                },
-                exporting: {enabled: false},
-
-                credits: {enabled: false}
-            };
+        this.chartConfig = chartConfig;
 
     }
 
@@ -50,15 +25,7 @@ class CampaignInfoController {
             .then((data) => {
                 this.campaignStats = data.data;
                 this.chartConfig.series[0].data = this.campaignStats.map(item => item.impressions);
-            });
-
-    }
-
-    getAllCampaigns() {
-        this._campaignSvc.getCanpaigns()
-            .then((data) => {
-              console.log(data);
-                this.campaigns = data.data;
+                this.chartConfig.xAxis.categories = this.campaignStats.map(item => item.date);
             });
 
     }

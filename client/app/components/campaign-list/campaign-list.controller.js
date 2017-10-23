@@ -1,24 +1,31 @@
+import * as CampaignAction from '../../redux/actions/campaign.action';
+
 class CampaignListController {
-    constructor(campaignSvc) {
+    constructor($ngRedux, $scope, campaignSvc) {
 
         'ngInject';
 
         this._campaignSvc = campaignSvc;
 
-        this.getAllCampaigns();
-
-
+        $ngRedux.subscribe(() => {
+            let state = $ngRedux.getState();
+            this.campaign = state.campaignsReducer.campaigns.campaigns;
+        })
     }
-    
-    getAllCampaigns() {
-        this._campaignSvc.getCanpaigns()
+
+    activateStatus(id) {
+        this._campaignSvc.activateStatus(id)
             .then((data) => {
-              console.log(data);
-                this.campaignStats = data.data;
-            });
+                console.log(data);
+            })
+    } 
 
-    }
-
+    deactivateStatus(id) {
+        this._campaignSvc.activateStatus(id)
+            .then((data) => {
+                console.log(data);
+            })
+    } 
 }
 
 export default CampaignListController;

@@ -14,7 +14,7 @@ let campaignListModule = angular.module('campaignListModule', [
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('home', {
+    .state('campaign-list', {
       url: '/',
       component: 'campaignListComponent'
     });

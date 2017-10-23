@@ -1,23 +1,51 @@
 import angular from 'angular';
+import * as CampaignAction from '../../redux/actions/campaign.action';
 
 class campaignSvc{
-    constructor($http) {
+    constructor($http, $ngRedux, baseUrl) {
 
         'ngInject';
 
+        this.baseUrl = baseUrl
+
         this.http = $http;
+
+        this.getCanpaigns()
+            .then((data) => {
+                $ngRedux.dispatch(CampaignAction.setCampaign(data.data));
+                // CampaignAction.setCampaign(data.data);
+                // this.campaignStats = data.data;
+            });
+
     }
 
     getCanpaigns() {
+        console.log('base url', this.baseUrl);
         return this.http({
-            url: `https://5cd3f999-f49f-4e42-8b8b-173c7185f093.mock.pstmn.io/campaigns`
+            method: 'GET',
+            url: `${this.baseUrl}`
         });
     }
 
     getCampaignStats(id) {
         console.log(id);
         return this.http({
-            url: `https://5cd3f999-f49f-4e42-8b8b-173c7185f093.mock.pstmn.io/campaigns/${id}/stats`
+            method: 'GET',
+            url: `${this.baseUrl}/${id}/stats`
+        });
+    }
+
+    activateStatus(id) {
+        return this.http({
+            method: 'POST',
+            url: `${this.baseUrl}/${id}/activate`
+        });
+    }
+
+    deactivateStatus(id) {
+        return this.http({
+            method: 'POST',
+            url: `${this.baseUrl}/${id}/deactivate`
         });
     }
 }

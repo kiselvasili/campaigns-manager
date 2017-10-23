@@ -1,16 +1,32 @@
-<navbar></navbar>
- <div class="dropdown show">
-    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Change Campaign
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <div ng-repeat="key in $ctrl.campaigns">
-            <a class="dropdown-item" 
-            ui-sref="campaign-stat({name: key.name, id: key.id })">
-                {{key.name}}
-            </a> 
-        
+<div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>{{$ctrl.compaignName}}</h2>
+            </div>
+            <div class="col">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Change Campaign
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <div ng-repeat="key in $ctrl.campaigns">
+                            <a class="dropdown-item" 
+                            ui-sref="campaign-stat({name: key.name, id: key.id })">
+                                {{key.name}}
+                            </a> 
+                        
+                        </div>
+                    </div>
+                </div>
+
+                <a ui-sref="campaign-list" class="btn btn-light">
+                    All Campaigns
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <highchart id="chart1" config="$ctrl.chartConfig"></highchart> 
         </div>
     </div>
-</div>
- <highchart id="chart1" config="$ctrl.chartConfig"></highchart> 
+ 
