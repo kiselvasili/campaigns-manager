@@ -6,21 +6,18 @@ class campaignSvc{
 
         'ngInject';
 
-        this.baseUrl = baseUrl
+        this.baseUrl = baseUrl;
 
         this.http = $http;
 
         this.getCanpaigns()
             .then((data) => {
                 $ngRedux.dispatch(CampaignAction.setCampaign(data.data));
-                // CampaignAction.setCampaign(data.data);
-                // this.campaignStats = data.data;
             });
 
     }
 
     getCanpaigns() {
-        console.log('base url', this.baseUrl);
         return this.http({
             method: 'GET',
             url: `${this.baseUrl}`
@@ -28,7 +25,6 @@ class campaignSvc{
     }
 
     getCampaignStats(id) {
-        console.log(id);
         return this.http({
             method: 'GET',
             url: `${this.baseUrl}/${id}/stats`

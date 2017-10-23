@@ -1,5 +1,7 @@
+import { ReduxUtil } from '../../redux/redux.util';
+
 class CampaignInfoController {
-    constructor($stateParams, campaignSvc, $state, $ngRedux, chartConfig) {
+    constructor($stateParams, campaignSvc, $state, $ngRedux, $scope, chartConfig) {
 
         'ngInject';
 
@@ -9,11 +11,10 @@ class CampaignInfoController {
 
         this.compaignName = $stateParams.name;
         this.compaignId = $stateParams.id;
-        $ngRedux.subscribe(() => {
-            let state = $ngRedux.getState();
-            console.log(state);
-            this.campaigns = state.campaignsReducer.campaigns.campaigns;
-        })
+
+        const unsubscribe = $ngRedux.connect(ReduxUtil.mapStateToThis)(this);
+        $scope.$on('$destroy', unsubscribe);
+
         this.getAllCampaignStats();
 
         this.chartConfig = chartConfig;
@@ -28,6 +29,12 @@ class CampaignInfoController {
                 this.chartConfig.xAxis.categories = this.campaignStats.map(item => item.date);
             });
 
+    }
+
+    mapStateToThis(state) {
+        return {
+            campaign: state.campaignsReducer.campaigns.campaigns
+        };
     }
 
 }

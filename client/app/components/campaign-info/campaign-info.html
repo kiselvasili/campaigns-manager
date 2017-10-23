@@ -9,7 +9,7 @@
                         Change Campaign
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <div ng-repeat="key in $ctrl.campaigns">
+                        <div ng-repeat="key in $ctrl.campaign">
                             <a class="dropdown-item" 
                             ui-sref="campaign-stat({name: key.name, id: key.id })">
                                 {{key.name}}

@@ -1,4 +1,5 @@
 import * as CampaignAction from '../../redux/actions/campaign.action';
+import { ReduxUtil } from '../../redux/redux.util';
 
 class CampaignListController {
     constructor($ngRedux, $scope, campaignSvc) {
@@ -7,25 +8,21 @@ class CampaignListController {
 
         this._campaignSvc = campaignSvc;
 
-        $ngRedux.subscribe(() => {
-            let state = $ngRedux.getState();
-            this.campaign = state.campaignsReducer.campaigns.campaigns;
-        })
+        const unsubscribe = $ngRedux.connect(ReduxUtil.mapStateToThis, CampaignAction)(this);
+        $scope.$on('$destroy', unsubscribe);
     }
 
     activateStatus(id) {
         this._campaignSvc.activateStatus(id)
             .then((data) => {
-                console.log(data);
             })
     } 
 
     deactivateStatus(id) {
         this._campaignSvc.activateStatus(id)
             .then((data) => {
-                console.log(data);
             })
-    } 
+    }
 }
 
 export default CampaignListController;
