@@ -4,6 +4,11 @@ import { ReduxUtil } from '../../redux/redux.util';
 class CampaignListController {
     constructor($ngRedux, $scope, campaignSvc) {
 
+        let statuses = {
+            active: 'ACTIVE',
+            disctive: 'INACTIVE'
+        };
+
         'ngInject';
 
         this._campaignSvc = campaignSvc;
@@ -16,7 +21,7 @@ class CampaignListController {
         let campaign = this.campaigns.find(campaign => campaign.id === id);
         this._campaignSvc.activateStatus(id)
             .then((data) => {
-                campaign.status = 'INACTIVE';
+                campaign.status = this.statuses.active;
             })
     } 
 
@@ -24,7 +29,7 @@ class CampaignListController {
         let campaign = this.campaigns.find(campaign => campaign.id === id);
         this._campaignSvc.activateStatus(id)
             .then((data) => {
-                campaign.status = 'ACTIVE';
+                campaign.status = this.statuses.disctive;
             })
     }
 }
