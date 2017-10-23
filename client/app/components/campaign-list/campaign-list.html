@@ -12,7 +12,8 @@
                 <tbody>
                     <tr ng-repeat="key in $ctrl.campaign">
                         <td>
-                        <span class="badge badge-primary">{{key.status}}</span>
+                        <span class="badge"
+                            ng-class="key.status=='ACTIVE' ? 'badge-primary' : 'badge-secondary'">{{key.status}}</span>
                         </td>
                         <td>{{key.name}}</td>
                         <td>{{key.daily_budget}}</td>
