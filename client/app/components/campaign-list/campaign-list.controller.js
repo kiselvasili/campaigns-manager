@@ -4,12 +4,12 @@ import { ReduxUtil } from '../../redux/redux.util';
 class CampaignListController {
     constructor($ngRedux, $scope, campaignSvc) {
 
+        'ngInject';
+
         let statuses = {
             active: 'ACTIVE',
             disctive: 'INACTIVE'
         };
-
-        'ngInject';
 
         this._campaignSvc = campaignSvc;
 
