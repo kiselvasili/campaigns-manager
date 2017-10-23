@@ -23,7 +23,7 @@ class CampaignInfoController {
         this._campaignSvc.getCampaignStats(this.compaignId)
             .then((data) => {
                 this.campaignStats = data.data;
-                this.campaignStats.map(item => {
+                this.campaignStats.forEach(item => {
                     this.chartConfig.series[0].data.push(item.impressions);
                     this.chartConfig.xAxis.categories.push(item.date);
                 });

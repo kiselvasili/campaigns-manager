@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import { SET_CAMPAIGN } from '../../constants/ActionTypes';
 
 export const INITIAL_STATE = {
@@ -15,8 +14,4 @@ function campaignsReducer(state = INITIAL_STATE, action) {
     }
 }
 
-const rootReducer = combineReducers({
-    campaignsReducer
-});
-
-export default rootReducer;
+export default campaignsReducer;

@@ -8,7 +8,7 @@ class campaignSvc{
 
         this.baseUrl = baseUrl;
 
-        this.http = $http;
+        this._$http = $http;
 
         this.getCanpaigns()
             .then((data) => {
@@ -18,28 +18,28 @@ class campaignSvc{
     }
 
     getCanpaigns() {
-        return this.http({
+        return this._$http({
             method: 'GET',
             url: `${this.baseUrl}`
         });
     }
 
     getCampaignStats(id) {
-        return this.http({
+        return this._$http({
             method: 'GET',
             url: `${this.baseUrl}/${id}/stats`
         });
     }
 
     activateStatus(id) {
-        return this.http({
+        return this._$http({
             method: 'POST',
             url: `${this.baseUrl}/${id}/activate`
         });
     }
 
     deactivateStatus(id) {
-        return this.http({
+        return this._$http({
             method: 'POST',
             url: `${this.baseUrl}/${id}/deactivate`
         });
