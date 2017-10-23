@@ -41,7 +41,6 @@ let paths = {
     path.join(__dirname, root, 'app/app.js')
   ],
   output: root,
-  blankTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
   dest: path.join(__dirname, 'dist')
 };
 

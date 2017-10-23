@@ -7,8 +7,6 @@ class CampaignInfoController {
 
         this._campaignSvc = campaignSvc;
 
-        this._params = $state;
-
         this.compaignName = $stateParams.name;
         this.compaignId = $stateParams.id;
 
@@ -25,16 +23,11 @@ class CampaignInfoController {
         this._campaignSvc.getCampaignStats(this.compaignId)
             .then((data) => {
                 this.campaignStats = data.data;
-                this.chartConfig.series[0].data = this.campaignStats.map(item => item.impressions);
-                this.chartConfig.xAxis.categories = this.campaignStats.map(item => item.date);
+                this.campaignStats.map(item => {
+                    this.chartConfig.series[0].data.push(item.impressions);
+                    this.chartConfig.xAxis.categories.push(item.date);
+                });
             });
-
-    }
-
-    mapStateToThis(state) {
-        return {
-            campaign: state.campaignsReducer.campaigns.campaigns
-        };
     }
 
 }
