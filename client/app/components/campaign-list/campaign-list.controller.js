@@ -13,14 +13,18 @@ class CampaignListController {
     }
 
     activateStatus(id) {
+        let campaign = this.campaigns.find(campaign => campaign.id === id);
         this._campaignSvc.activateStatus(id)
             .then((data) => {
+                campaign.status = 'INACTIVE';
             })
     } 
 
     deactivateStatus(id) {
+        let campaign = this.campaigns.find(campaign => campaign.id === id);
         this._campaignSvc.activateStatus(id)
             .then((data) => {
+                campaign.status = 'ACTIVE';
             })
     }
 }

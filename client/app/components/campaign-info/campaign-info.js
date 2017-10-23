@@ -17,11 +17,8 @@ let campaignInfoModule = angular.module('campaignInfoModule', [
 
   $stateProvider
     .state('campaign-stat', {
-        url: '/campaign-stat/:id',
-        component: 'campaignInfoComponent',
-        params: {
-            name: null
-        }
+        url: '/campaign-stat/:id/:name',
+        component: 'campaignInfoComponent'
     });
 })
 
