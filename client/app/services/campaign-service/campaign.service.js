@@ -2,11 +2,11 @@ import angular from 'angular';
 import * as CampaignAction from '../../redux/actions/campaign.action';
 
 class campaignSvc{
-    constructor($http, $ngRedux, baseUrl) {
+    constructor($http, $ngRedux, apiUrl) {
 
         'ngInject';
 
-        this.baseUrl = baseUrl;
+        this.apiUrl = apiUrl;
 
         this._$http = $http;
 
@@ -20,28 +20,28 @@ class campaignSvc{
     getCanpaigns() {
         return this._$http({
             method: 'GET',
-            url: `${this.baseUrl}`
+            url: `${this.apiUrl}`
         });
     }
 
     getCampaignStats(id) {
         return this._$http({
             method: 'GET',
-            url: `${this.baseUrl}/${id}/stats`
+            url: `${this.apiUrl}/${id}/stats`
         });
     }
 
     activateStatus(id) {
         return this._$http({
             method: 'POST',
-            url: `${this.baseUrl}/${id}/activate`
+            url: `${this.apiUrl}/${id}/activate`
         });
     }
 
     deactivateStatus(id) {
         return this._$http({
             method: 'POST',
-            url: `${this.baseUrl}/${id}/deactivate`
+            url: `${this.apiUrl}/${id}/deactivate`
         });
     }
 }
