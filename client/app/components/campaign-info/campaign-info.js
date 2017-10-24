@@ -6,7 +6,6 @@ import highcharts from 'highcharts-ng';
 
 let campaignInfoModule = angular.module('campaignInfoModule', [
     uiRouter,
-    campaignSvcModule,
     highcharts
 ])
 

@@ -1,4 +1,4 @@
-import { SET_CAMPAIGN } from '../../constants/ActionTypes';
+import { SET_CAMPAIGN } from '../actions/actionTypes';
 
 export const INITIAL_STATE = {
     campaigns: []

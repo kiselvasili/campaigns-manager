@@ -1,6 +1,6 @@
-import * as types from '../../constants/ActionTypes';
+import * as types from './actionTypes';
 
-export function setCampaign(campaigns) {
+export function setCampaigns(campaigns) {
     return {
         type: types.SET_CAMPAIGN,
         payload: { campaigns }

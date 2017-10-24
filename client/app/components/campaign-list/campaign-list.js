@@ -4,8 +4,7 @@ import campaignListComponent from './campaign-list.component';
 import campaignSvcModule from '../../services/campaign-service/campaign.service';
 
 let campaignListModule = angular.module('campaignListModule', [
-  uiRouter,
-  campaignSvcModule
+  uiRouter
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {

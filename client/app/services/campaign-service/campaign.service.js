@@ -1,7 +1,6 @@
-import angular from 'angular';
 import * as CampaignAction from '../../redux/actions/campaign.action';
 
-class campaignSvc{
+class CampaignSvc{
     constructor($http, $ngRedux, apiUrl) {
 
         'ngInject';
@@ -12,43 +11,29 @@ class campaignSvc{
 
         this.getCanpaigns()
             .then((data) => {
-                $ngRedux.dispatch(CampaignAction.setCampaign(data.data));
+                if (!data) {
+                    return;
+                }
+                $ngRedux.dispatch(CampaignAction.setCampaigns(data));
             });
 
     }
 
     getCanpaigns() {
-        return this._$http({
-            method: 'GET',
-            url: `${this.apiUrl}`
-        });
+        return this._$http.get(`${this.apiUrl}`);
     }
 
     getCampaignStats(id) {
-        return this._$http({
-            method: 'GET',
-            url: `${this.apiUrl}/${id}/stats`
-        });
+        return this._$http.get(`${this.apiUrl}/${id}/stats`);
     }
 
     activateStatus(id) {
-        return this._$http({
-            method: 'POST',
-            url: `${this.apiUrl}/${id}/activate`
-        });
+        return this._$http.post(`${this.apiUrl}/${id}/activate`);
     }
 
     deactivateStatus(id) {
-        return this._$http({
-            method: 'POST',
-            url: `${this.apiUrl}/${id}/deactivate`
-        });
+        return this._$http.post(`${this.apiUrl}/${id}/deactivate`);
     }
 }
 
-let campaignSvcModule = angular.module('campaignSvcModule', [])
-    .service('campaignSvc', campaignSvc)
-
-    .name;
-
-export default campaignSvcModule;
+export default CampaignSvc;

@@ -1,6 +1,5 @@
 import angular from 'angular';
 import ngRedux from 'ng-redux';
-import ngReduxDevTools from 'ng-redux-dev-tools';
 import rootReducer from './redux/reducers/index';
 import uiRouter from 'angular-ui-router';
 import Common from './common/common';
@@ -9,15 +8,15 @@ import AppComponent from './app.component';
 
 angular.module('app', [
     ngRedux,
-    ngReduxDevTools,
     uiRouter,
     Common,
     Components
   ])
-  .config(($locationProvider, $ngReduxProvider, devToolsServiceProvider) => {
+  .config(($locationProvider, $httpProvider, $ngReduxProvider) => {
     "ngInject";
     $locationProvider.html5Mode(true).hashPrefix('!');
-    $ngReduxProvider.createStoreWith(rootReducer, [], [devToolsServiceProvider.instrument()]);
+    $ngReduxProvider.createStoreWith(rootReducer, []);
+    $httpProvider.interceptors.push('HttpInterceptor');
   })
 
   .component('app', AppComponent);
