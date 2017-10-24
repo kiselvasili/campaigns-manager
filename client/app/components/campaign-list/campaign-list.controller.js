@@ -8,7 +8,7 @@ class CampaignListController {
 
         this.statuses = {
             active: 'ACTIVE',
-            disctive: 'INACTIVE'
+            disactive: 'INACTIVE'
         };
 
         this._campaignSvc = CampaignSvc;
@@ -27,7 +27,7 @@ class CampaignListController {
     deactivateStatus(campaign) {
         this._campaignSvc.activateStatus(campaign.id)
             .then((data) => {
-                campaign.status = this.statuses.disctive;
+                campaign.status = this.statuses.disactive;
             })
     }
 }

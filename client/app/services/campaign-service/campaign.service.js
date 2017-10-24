@@ -9,7 +9,7 @@ class CampaignSvc{
 
         this._$http = $http;
 
-        this.getCanpaigns()
+        this.getCampaigns()
             .then((data) => {
                 if (!data) {
                     return;
@@ -19,7 +19,7 @@ class CampaignSvc{
 
     }
 
-    getCanpaigns() {
+    getCampaigns() {
         return this._$http.get(`${this.apiUrl}`);
     }
 

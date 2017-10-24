@@ -1,5 +1,6 @@
 import { ReduxUtil } from '../../redux/redux.util';
 import cloneDeep from 'lodash/cloneDeep';
+import find from 'lodash/find';
 
 class CampaignInfoController {
     constructor($scope, $stateParams, $state, $ngRedux, CampaignSvc, chartConfig) {
@@ -16,10 +17,10 @@ class CampaignInfoController {
         this.init();
 
         this.chartConfig = cloneDeep(chartConfig);
-
     }
 
     getAllCampaignStats() {
+        
         this._campaignSvc.getCampaignStats(this.compaignId)
             .then((data) => {
                 this.campaignStats = data;
@@ -33,7 +34,18 @@ class CampaignInfoController {
             });
     }
 
+    getCampaignState() {
+        if (this.compaignName) {
+            return;           
+        }
+        this._campaignSvc.getCampaigns()
+            .then((data) => {
+                this.compaignName = find(data, {id: this.compaignId}).name; 
+            });
+    }
+
     init() {
+        this.getCampaignState();
         this.getAllCampaignStats();
     }
 
